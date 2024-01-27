@@ -381,7 +381,7 @@ Value: The actual data associated with the key.
 
   <img src = "./images/image-4.png" width=500/>
   <img src = "./images/image-5.png" width=500/>
-  <img src = "./images/testcase4.png" width=500/>
+  <img src = "./images/testcase4.png" width=800/>
 
 ## Testing with regular Memcached client
 
