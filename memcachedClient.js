@@ -1,6 +1,7 @@
 const Memcached = require("memcached");
+const { HOST, PORT } = require("./config");
 
-const memcached = new Memcached("127.0.0.1:3000");
+const memcached = new Memcached(`${HOST}:${PORT}`);
 
 // Example: Set a key-value pair
 memcached.set("example_key", "example_value", 100, (err) => {

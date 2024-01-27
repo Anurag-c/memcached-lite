@@ -1,8 +1,9 @@
 const { TCPClient } = require("./customClient");
+const { HOST, PORT } = require("./config");
 
 // TEST1: Multiple SET commands
 async function test1() {
-  const client = await TCPClient(3000, "127.0.0.1");
+  const client = await TCPClient(PORT, HOST);
   let response = await client.set("phone", "8106501550");
   console.log(response);
 
@@ -19,12 +20,14 @@ async function test1() {
   console.log(response);
 
   await client.disconnect();
-  console.log("Client Disconnected From Server\n");
+  console.log(
+    `Client ${client.host}:${client.port} Disconnected From Server\n`
+  );
 }
 
 // TEST2: Multiple GET commands
 async function test2() {
-  const client = await TCPClient(3000, "127.0.0.1");
+  const client = await TCPClient(PORT, HOST);
   let response = await client.get("phone");
   console.log(response);
 
@@ -41,12 +44,14 @@ async function test2() {
   console.log(response);
 
   await client.disconnect();
-  console.log("Client Disconnected From Server\n");
+  console.log(
+    `Client ${client.host}:${client.port} Disconnected From Server\n`
+  );
 }
 
 // TEST3: Random SET and GET commands
 async function test3() {
-  const client = await TCPClient(3000, "127.0.0.1");
+  const client = await TCPClient(PORT, HOST);
   // set name as "Anurag"
   let response = await client.set("name", "Anurag");
   console.log(response);
@@ -88,23 +93,25 @@ async function test3() {
   console.log(response);
 
   await client.disconnect();
-  console.log("Client Disconnected From Server\n");
+  console.log(
+    `Client ${client.host}:${client.port} Disconnected From Server\n`
+  );
 }
 
 // TEST4: Make Concurrent Requests from 3 Clients
 async function test4() {
   async function client1() {
-    const client = await TCPClient(3000, "127.0.0.1");
+    const client = await TCPClient(PORT, HOST);
     // set course as "Computer Science"
-    console.log("Client 1 SET Request Sent");
+    console.log("Client 1 SET Request Sent:");
     let response = await client.set("course", "Computer Science");
-    console.log("Client 1 SET Response");
+    console.log("Client 1 SET Response:");
     console.log(response);
 
     // get course
-    console.log("Client 1 GET Request Sent");
+    console.log("Client 1 GET Request Sent:");
     response = await client.get("course");
-    console.log("Client 1 GET Response");
+    console.log("Client 1 GET Response:");
     console.log(response);
 
     await client.disconnect();
@@ -112,18 +119,18 @@ async function test4() {
   }
 
   async function client2() {
-    const client = await TCPClient(3000, "127.0.0.1");
+    const client = await TCPClient(PORT, HOST);
 
     // set course as "Data Science"
-    console.log("Client 2 SET Request Sent");
+    console.log("Client 2 SET Request Sent:");
     let response = await client.set("course", "Data Science");
-    console.log("Client 2 SET Response");
+    console.log("Client 2 SET Response:");
     console.log(response);
 
     // get course
-    console.log("Client 2 GET Request Sent");
+    console.log("Client 2 GET Request Sent:");
     response = await client.get("course");
-    console.log("Client 2 GET Response");
+    console.log("Client 2 GET Response:");
     console.log(response);
 
     await client.disconnect();
@@ -131,17 +138,17 @@ async function test4() {
   }
 
   async function client3() {
-    const client = await TCPClient(3000, "127.0.0.1");
+    const client = await TCPClient(PORT, HOST);
     // set course as "Information Science"
-    console.log("Client 3 SET Request Sent");
+    console.log("Client 3 SET Request Sent:");
     let response = await client.set("course", "Information Science");
-    console.log("Client 3 SET Response");
+    console.log("Client 3 SET Response:");
     console.log(response);
 
     // get course
-    console.log("Client 3 GET Request Sent");
+    console.log("Client 3 GET Request Sent:");
     response = await client.get("course");
-    console.log("Client 3 GET Response");
+    console.log("Client 3 GET Response:");
     console.log(response);
 
     await client.disconnect();

@@ -1,6 +1,6 @@
 const net = require("net");
 
-exports.TCPClient = function (port, host) {
+function TCPClient(port, host) {
   const client = net.Socket();
 
   function sendRequest(command, key, flags, exptime, bytes, value) {
@@ -28,9 +28,12 @@ exports.TCPClient = function (port, host) {
 
       // Construct the request based on the command
       if (command == "set") {
-        client.write(`${command} ${key} ${flags} ${exptime} ${bytes}\r\n`);
+        console.log(`${command} ${key} ${bytes}`);
+        console.log(`${value}\r\n`);
+        client.write(`${command} ${key} ${bytes}\r\n`);
         client.write(`${value}\r\n`);
       } else if (command == "get") {
+        console.log(`${command} ${key}\r\n`);
         client.write(`${command} ${key}\r\n`);
       } else {
         reject("Make a set / get request with proper parameters");
@@ -39,7 +42,7 @@ exports.TCPClient = function (port, host) {
   }
 
   async function setRequest(key, value) {
-    return sendRequest("set", key, "0", "0", value.length, value);
+    return sendRequest("set", key, 0, 100, value.length, value);
   }
 
   async function getRequest(key) {
@@ -57,8 +60,6 @@ exports.TCPClient = function (port, host) {
 
   client.on("close", () => {});
 
-  client.on("end", () => {});
-
   const obj = {
     set: setRequest,
     get: getRequest,
@@ -67,10 +68,16 @@ exports.TCPClient = function (port, host) {
 
   return new Promise((resolve) => {
     client.once("data", (data) => {
-      console.log(`Connection established with ${host}:${port}\n`);
+      obj.host = client.address().address;
+      obj.port = client.address().port;
+      console.log(
+        `Client ${obj.host}:${obj.port} Connection established with ${host}:${port}\n`
+      );
       console.log(data.toString());
       resolve(obj);
     });
     client.connect(port, host, () => {});
   });
-};
+}
+
+module.exports = { TCPClient };

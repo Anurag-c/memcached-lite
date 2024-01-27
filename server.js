@@ -1,6 +1,7 @@
 const net = require("net");
 const { Mutex } = require("async-mutex");
 
+const { HOST, PORT } = require("./config");
 const {
   randomSleep,
   removeBackspaces,
@@ -8,17 +9,18 @@ const {
   writeJSONFile,
 } = require("./utils");
 
-const welcomeMessage = `Welcome to Memcached-lite!\r\nUse 'set' to store key-value pairs\r\nUse 'get' to retrieve the value of a key\r\nGet ready for a cache-tastic experience!\r\n\r\n`;
+const [memcacheServer] = process.argv.slice(2);
 
 function TCPServer(port, host) {
   const server = net.createServer();
   const sockets = [];
   const delimiter = "\r\n";
+  const welcomeMessage = `Welcome to Memcached-lite!\r\nUse 'set' to store key-value pairs\r\nUse 'get' to retrieve the value of a key\r\nGet ready for a cache-tastic experience!\r\n\r\n`;
   const fileLock = new Mutex();
 
   async function handleSetRequest(key, flags, exptime, bytes, value) {
-    await randomSleep();
     const release = await fileLock.acquire();
+    await randomSleep();
     try {
       const jsonData = await readJSONFile("kvstore.json");
       jsonData[key] = { flags, exptime, bytes, value };
@@ -33,8 +35,8 @@ function TCPServer(port, host) {
   }
 
   async function handleGetRequest(key) {
-    await randomSleep();
     const release = await fileLock.acquire();
+    await randomSleep();
     try {
       const jsonData = await readJSONFile("kvstore.json");
       if (jsonData[key]) {
@@ -62,7 +64,13 @@ function TCPServer(port, host) {
       const arr = command.trim().split(" ");
 
       if (arr[0] == "set") {
-        [_, key, flags, exptime, bytes] = arr;
+        if (arr.length == 3) {
+          [_, key, bytes] = arr;
+          flags = 0;
+          exptime = 100;
+        } else {
+          [_, key, flags, exptime, bytes] = arr;
+        }
         value = "";
       } else if (arr[0] == "get") {
         key = arr[1];
@@ -73,15 +81,16 @@ function TCPServer(port, host) {
         value = command;
         const message = await handleSetRequest(
           key,
-          flags,
-          exptime,
-          bytes,
+          Number(flags),
+          Number(exptime),
+          Number(bytes),
           value
         );
         key = flags = exptime = bytes = value = "";
         socket.write(message);
       }
     }
+
     socket.state = { key, flags, exptime, bytes, receivedData };
   }
 
@@ -101,7 +110,7 @@ function TCPServer(port, host) {
 
     socket.setEncoding("utf-8");
 
-    socket.write(welcomeMessage);
+    if (memcacheServer === "false") socket.write(welcomeMessage);
 
     socket.on("data", async (data) => {
       await onData(socket, data);
@@ -132,4 +141,4 @@ function TCPServer(port, host) {
   });
 }
 
-TCPServer(3000, "127.0.0.1").then(() => {});
+TCPServer(PORT, HOST).then(() => {});

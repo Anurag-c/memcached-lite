@@ -2,7 +2,6 @@ const fs = require("fs").promises;
 
 function randomSleep() {
   const randomDelay = Math.floor(Math.random() * 1000);
-  console.log(`${randomDelay / 1000} seconds sleep\n`);
   return new Promise((resolve) => setTimeout(resolve, randomDelay));
 }
 
