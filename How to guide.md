@@ -18,7 +18,7 @@
 
   **NOTE** : If you run the server with this command it will not work properly with regular Memcached Clients. Hence use this only when you want to test custom client or if you want to connect from command line using telnet.
 
-    <img src=",./images/image-7.png" width=500/>
+    <img src="./images/image-7.png" width=500/>
 
 ## 3. How to run the TCP Server with regular Memcached-Client compatability
 
