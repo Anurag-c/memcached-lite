@@ -1,38 +1,14 @@
 {
-  "phone": {
-    "flags": 0,
-    "exptime": 100,
-    "bytes": 10,
-    "value": "8128039055"
-  },
-  "food": {
-    "flags": 0,
-    "exptime": 100,
-    "bytes": 7,
-    "value": "Biryani"
-  },
   "name": {
     "flags": 0,
     "exptime": 100,
-    "bytes": 7,
-    "value": "Hanuman"
+    "bytes": 6,
+    "value": "Anurag"
   },
-  "address": {
+  "pincode": {
     "flags": 0,
     "exptime": 100,
-    "bytes": 17,
-    "value": "Chicago, Illionis"
-  },
-  "course": {
-    "flags": 0,
-    "exptime": 100,
-    "bytes": 19,
-    "value": "Information Science"
-  },
-  "example_key": {
-    "flags": 0,
-    "exptime": 100,
-    "bytes": 13,
-    "value": "example_value"
+    "bytes": 5,
+    "value": "50501"
   }
 }

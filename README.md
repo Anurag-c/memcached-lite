@@ -392,4 +392,41 @@ Value: The actual data associated with the key.
 
 - This test involves utilizing a standard Memcached client to interact with the core TCP server. The test exemplifies the compatibility of the server with regular Memcached clients.
 
+- Output:
+
   <img src = "./images/image-6.png" width=500/>
+
+## Testing with command line user inputs
+
+- ### Single Client
+
+  <img src = "./images/image-9.png" width=700/>
+
+- ### Multiple Clients
+
+  - set command with key as "pincode" and value "47408" is sent from client 1, and we got "STORED" as the response.
+  - get command with key as "pincode" is sent from client 2, and we got "47408" as the value.
+  - set command with key as "pincode" and value "50501" is sent from client 2, and we got "STORED" as the response.
+  - get command with key as "pincode" is sent from client 1, and we got "50501" as the value.
+  - set command with key as "name" and value "Anurag" is sent from client 1, and we got "STORED" as the response.
+  - get command with key as "name" is sent from client 2, and we got "Anurag" as the value.
+  - get command with key as "name" is sent from client 1, and we got "Anurag" as the value.
+    <br>
+    <br>
+    <img src = "./images/image-10.png" width=800/>
+
+## Limitations and Improvements
+
+- The server currently doesn't enforce explicit limits on key and value sizes. This could lead to potential issues, such as performance degradation or increased memory usage, with excessively large keys or values.
+
+- The current design restricts both multiple readers and writers simultaneously, limiting overall concurrency. While this approach ensures data integrity, it may impact system throughput, especially in scenarios where read operations significantly outnumber write operations.
+
+- We can implement a shared lock mechanism (readers-writer lock) to allow multiple clients to concurrently read data. This optimization can enhance system throughput, particularly in scenarios where read operations dominate.
+
+- While the server handles basic errors, it may not handle all possible edge cases or network-related errors gracefully. Enhancements in error handling, logging, and providing meaningful error messages to clients could be considered.
+
+- The server assumes well-formed input from clients. It might not handle cases where incoming commands are malformed or incomplete. Proper parsing and validation of client commands can enhance robustness.
+
+- If a client sends an invalid command that the server doesn't recognize, the server might not provide a clear error response. Implementing a more informative error response in such cases can improve the client-server interaction.
+
+- The server currently lacks authentication and authorization mechanisms. Implementing user authentication and access control would enhance the security of the server.
