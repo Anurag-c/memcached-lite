@@ -374,6 +374,7 @@ Value: The actual data associated with the key.
 
   <img src = "./images/image-2.png" width=500/>
   <img src = "./images/image-3.png" width=500/>
+  ![Alt text](image.png)
 
 **Test Case 4 : Concurrent Requests from 3 Clients**
 

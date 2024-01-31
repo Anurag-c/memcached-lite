@@ -1,0 +1,32 @@
+{
+  "phone": {
+    "flags": 0,
+    "exptime": 100,
+    "bytes": 10,
+    "value": "8128039055"
+  },
+  "food": {
+    "flags": 0,
+    "exptime": 100,
+    "bytes": 7,
+    "value": "Biryani"
+  },
+  "name": {
+    "flags": 0,
+    "exptime": 100,
+    "bytes": 7,
+    "value": "Hanuman"
+  },
+  "address": {
+    "flags": 0,
+    "exptime": 100,
+    "bytes": 17,
+    "value": "Chicago, Illionis"
+  },
+  "course": {
+    "flags": 0,
+    "exptime": 100,
+    "bytes": 19,
+    "value": "Information Science"
+  }
+}
