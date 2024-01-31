@@ -48,7 +48,7 @@
   npm run test-client
   ```
 
-### B. Testing with Mecached client
+### B. Testing with Memcached client
 
 - Open a terminal and navigate to the project directory. Run the following command to run the TCP server with memcached client compatability.
 
