@@ -388,7 +388,7 @@ Value: The actual data associated with the key.
 
 ## Testing with regular Memcached client
 
-- The code found in `memcachedClient.js` uses the "memcached" library to interact with a Memcached server. It sets a key-value pair ("example_key" with "example_value") and retrieves the value for the same key. The results are logged, and the connection to the Memcached server is closed afterward.
+- The code found in `memcachedClient.js` uses the "memcached" library to interact with the core TCP server. It sets a key-value pair ("example_key" with "example_value") and retrieves the value for the same key. The results are logged, and the connection to the Memcached server is closed afterward.
 
 - This test involves utilizing a standard Memcached client to interact with the core TCP server. The test exemplifies the compatibility of the server with regular Memcached clients.
 
