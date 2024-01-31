@@ -39,7 +39,7 @@
 - Open a terminal and navigate to the project directory. Run the following command to run the TCP server.
 
   ```js
-  npm run sever
+  npm run server
   ```
 
 - Open another terminal and navigate to the project directory. Run the following command to run the testcases.
@@ -53,11 +53,25 @@
 - Open a terminal and navigate to the project directory. Run the following command to run the TCP server with memcached client compatability.
 
   ```js
-  npm run memcache-sever
+  npm run memcache-server
   ```
 
 - Open another terminal and navigate to the project directory. Run the following command to run the testcases.
 
   ```js
   npm run test-memcache-client
+  ```
+
+### C. Testing with Command Line (User Input)
+
+- Open a terminal and navigate to the project directory. Run the following command to run the TCP server.
+
+  ```js
+  npm run server
+  ```
+
+- Open another terminal anywhere. Run the following command to connect to the TCP server from command line.
+
+  ```js
+  telnet 127.0.0.1 3000
   ```
