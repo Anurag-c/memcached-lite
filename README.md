@@ -377,7 +377,7 @@ Value: The actual data associated with the key.
 
 **Test Case 4 : Concurrent Requests from 3 Clients**
 
-- Checks the server's behavior with concurrent requests from multiple clients. Three clients simultaneously set and get the value for the "course" key. Outputs each client's actions and the server's responses.
+- Checks the server's behavior with concurrent requests from multiple clients. Three clients simultaneously set and get the value for the "course" key. Outputs each client's actions and the server's responses. Extra logging has been added to understand the output clearly.
 
   <img src = "./images/image-4.png" width=500/>
   <img src = "./images/image-5.png" width=500/>
