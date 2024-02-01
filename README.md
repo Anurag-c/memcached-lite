@@ -106,7 +106,7 @@ The server employs a simple event-driven architecture using Node.js's `net` modu
   }
   ```
 
-- The function processes the received data, extracting individual commands delimited by the specified delimiter (\r\n). It ensures that partial or complete commands are appropriately handled.
+- The function processes the received data, extracting individual commands delimited by the specified delimiter `(\r\n)`. It ensures that partial or complete commands are appropriately handled.
 
   ```js
   while (receivedData.includes(delimiter)) {
@@ -411,9 +411,8 @@ Value: The actual data associated with the key.
   - set command with key as "name" and value "Anurag" is sent from client 1, and we got "STORED" as the response.
   - get command with key as "name" is sent from client 2, and we got "Anurag" as the value.
   - get command with key as "name" is sent from client 1, and we got "Anurag" as the value.
-    <br>
-    <br>
-    <img src = "./images/image-10.png" width=800/>
+
+  <img src = "./images/image-10.png" width=800/>
 
 ## Limitations and Improvements
 

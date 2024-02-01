@@ -75,3 +75,10 @@
   ```js
   telnet 127.0.0.1 3000
   ```
+
+  **NOTE**: Make sure telnet client is enabled in windows environment. To enable Telnet command line utilities:
+
+  - Click Start > Control Panel.
+  - Click Programs and Features.
+  - Click Turn Windows features on or off.
+  - In the Windows Features dialog box, check the Telnet Client check box.
